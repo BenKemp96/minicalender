@@ -5,7 +5,7 @@
         <label>Person</label>
         <input type="text" name="person" value="" required><br><br>
         <label>Date</label>
-        <input type="date" name="dmy" value="" required>
+        <input type="date" name="dmy" value="" max="<?php echo date('Y-m-d'); ?>" required>
         <input type="submit" name="submit_add_date" value="Submit">
     </form>
 </div>
@@ -14,9 +14,13 @@
 		++$month_id;
 		echo "<h1>" . $month . "</h1>";
 		foreach ($loadAll as $birthday) {
-			if ($birthday->month == $month_id) { ?>
-				<a href="<?php echo URL . 'calender/editDate/' . $birthday->id; ?>"><span><?= $birthday->day?></span> <?= $birthday->person . " " . $birthday->year ?></a>
-				<a href="<?php echo URL . 'calender/deleteDate/' . $birthday->id; ?>"> x</a><br>
+			if ($birthday->month == $month_id) {
+				$id = strip_tags($birthday->id); 
+				$person = strip_tags($birthday->person); 
+				$day = strip_tags($birthday->day);  
+				$year = strip_tags($birthday->year); ?>
+				<a href="<?php echo URL . 'calender/editDate/' . $id; ?>"><span><?= $day?></span> <?= $person . " " . $year ?></a>
+				<a href="<?php echo URL . 'calender/deleteDate/' . $id; ?>"> x</a><br>
 			<?php }
 		}
 	}
